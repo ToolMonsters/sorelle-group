@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sorelle Group — Boutique Recruitment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: 'Grace';
+    src: url('fonts/grace-webfont.woff2') format('woff2'),
+         url('fonts/grace-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --dark: #181614;
+    --ink: #2a2724;
+    --logo-blue: #8fb6d4;
+    --band-blue: #4f79b5;
+    --band-lightblue: #a9c9e6;
+    --band-cream: #efe9d6;
+    --band-gray: #c8c4bb;
+    --band-taupe: #968e87;
+    --band-olive: #57652f;
+    --paper: #f5f2ea;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    /* Body: Libre Baskerville */
+    font-family: 'Libre Baskerville', serif;
+    color: var(--ink);
+    background: var(--paper);
+  }
+
+  /* ============ HEADER ============ */
+  .site-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 2rem;
+    background: var(--dark);
+    transition: transform .45s ease, opacity .45s ease;
+  }
+  .site-header.is-hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    text-decoration: none;
+  }
+  .brand .wordmark {
+    /* Logo: Grace Regular */
+    font-family: 'Grace', 'Libre Baskerville', serif;
+    font-weight: normal;
+    font-size: 1.6rem;
+    letter-spacing: .22em;
+    color: var(--logo-blue);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .brand .tagline {
+    /* Subtitle: Libre Baskerville */
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 400;
+    font-size: .68rem;
+    letter-spacing: .18em;
+    color: #cfc9c0;
+    text-transform: uppercase;
+  }
+
+  /* hamburger: grid of dots, comme la maquette */
+  .menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: .4rem;
+    display: grid;
+    grid-template-columns: repeat(3, 6px);
+    gap: 4px;
+  }
+  .menu-toggle span {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--logo-blue);
+    transition: background .3s;
+  }
+  .menu-toggle:hover span { background: #fff; }
+
+  /* ============ FULLSCREEN MENU ============ */
+  .menu-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
+    transform: translateY(-100%);
+    transition: transform .55s cubic-bezier(.65,0,.35,1), visibility .55s;
+  }
+  .menu-overlay.is-open {
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .menu-overlay .menu-head {
+    background: var(--band-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex: 1.2;
+    min-height: 0;
+  }
+  .menu-overlay .menu-head .wordmark {
+    font-family: 'Grace', 'Libre Baskerville', serif;
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    letter-spacing: .28em;
+    color: var(--band-lightblue);
+    text-transform: uppercase;
+    font-weight: normal;
+  }
+  .menu-close {
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--band-lightblue);
+    line-height: 1;
+  }
+  .menu-close:hover { color: #fff; }
+
+  .menu-overlay nav {
+    display: flex;
+    flex-direction: column;
+    flex: 5;
+    min-height: 0;
+  }
+  .menu-overlay nav a {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    /* Section Header: Libre Baskerville Bold */
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--ink);
+    transition: filter .25s;
+  }
+  .menu-overlay nav a:hover { filter: brightness(1.08); }
+  .menu-overlay nav a:nth-child(1) { background: var(--band-lightblue); }
+  .menu-overlay nav a:nth-child(2) { background: var(--band-cream); }
+  .menu-overlay nav a:nth-child(3) { background: var(--band-gray); }
+  .menu-overlay nav a:nth-child(4) { background: var(--band-taupe); color: #f5f2ea; }
+  .menu-overlay nav a:nth-child(5) { background: var(--band-olive); color: #f5f2ea; }
+
+  /* ============ HERO ============ */
+  .hero {
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+    /* PLACEHOLDER — remplacer par : background: url('images/hero.jpg') center/cover; */
+    background:
+      radial-gradient(ellipse at 70% 20%, rgba(255,255,255,.25), transparent 50%),
+      radial-gradient(ellipse at 20% 80%, rgba(30,80,90,.18), transparent 55%),
+      linear-gradient(160deg, #9ec9c4 0%, #7fb5b3 45%, #8ec0bd 100%);
+  }
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .hero h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(1.7rem, 3.8vw, 2.8rem);
+    font-weight: 400;
+    margin-bottom: 1.4rem;
+    max-width: 28ch;
+  }
+  .hero h1 em { font-style: italic; }
+  .hero .lede {
+    font-size: clamp(.92rem, 1.3vw, 1.05rem);
+    line-height: 1.7;
+    max-width: 52ch;
+    margin-bottom: 2rem;
+  }
+  .hero .lede em { font-style: italic; }
+
+  .cta-row {
+    display: flex;
+    gap: .9rem;
+    flex-wrap: wrap;
+    margin-bottom: 3.5rem;
+  }
+  .btn {
+    /* Caption: Canva Sans (propriétaire) — Jost en repli */
+    font-family: 'Canva Sans', 'Jost', sans-serif;
+    font-size: .78rem;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: .85rem 1.6rem;
+    transition: opacity .25s;
+  }
+  .btn:hover { opacity: .85; }
+  .btn-dark { background: var(--dark); color: #f5f2ea; }
+  .btn-light { background: var(--paper); color: var(--ink); }
+
+  .stats {
+    display: flex;
+    gap: clamp(2rem, 6vw, 5rem);
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat .num {
+    font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+    font-weight: 500;
+  }
+  .stat .label {
+    font-family: 'Canva Sans', 'Jost', sans-serif;
+    font-size: .62rem;
+    font-weight: 400;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    margin-top: .25rem;
+  }
+
+  /* ============ MISSION ============ */
+  .mission {
+    min-height: 88vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 5rem 2rem;
+    position: relative;
+    color: #f3efe8;
+    /* PLACEHOLDER — remplacer par : background: url('images/mission-horse.jpg') center/cover; */
+    background:
+      linear-gradient(rgba(20,15,12,.35), rgba(20,15,12,.45)),
+      linear-gradient(170deg, #6b5a4e 0%, #3d3530 40%, #1f1b18 100%);
+  }
+  .mission blockquote {
+    /* Quote: Lora Italic */
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: clamp(1.4rem, 2.8vw, 2.1rem);
+    font-weight: 400;
+    line-height: 1.55;
+    max-width: 34ch;
+  }
+  .mission blockquote em { font-weight: 500; }
+  .mission .divider {
+    width: 120px;
+    height: 1px;
+    background: rgba(245,242,234,.6);
+    margin: 2.2rem auto 1.6rem;
+  }
+  .mission .kicker {
+    font-family: 'Grace', 'Libre Baskerville', serif;
+    font-size: 1rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--logo-blue);
+    text-decoration: none;
+  }
+  .mission .kicker:hover { color: #fff; }
+
+  /* ============ APPROACH / HOW WE WORK ============ */
+  .approach {
+    padding: 5rem 2rem;
+    background: var(--paper);
+  }
+  .approach-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .kicker-line {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    font-family: 'Canva Sans', 'Jost', sans-serif;
+    font-size: .72rem;
+    font-weight: 500;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: #7da3c8;
+    margin-bottom: 1rem;
+  }
+  .kicker-line::before {
+    content: '';
+    width: 34px;
+    height: 1px;
+    background: #7da3c8;
+  }
+  .approach h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 400;
+    margin-bottom: .9rem;
+  }
+  .approach h2 .accent { color: #7da3c8; }
+  .approach .intro {
+    font-size: .92rem;
+    line-height: 1.7;
+    max-width: 72ch;
+    margin-bottom: 2.2rem;
+  }
+  .approach .intro em { font-style: italic; }
+
+  /* Tuiles accordéon */
+  .tiles {
+    display: flex;
+    min-height: 440px;
+  }
+  .tile {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2.2rem 1.8rem;
+    color: #f3efe8;
+    overflow: hidden;
+    transition: flex .55s cubic-bezier(.4,0,.2,1);
+  }
+  /* PLACEHOLDERS — remplacer par : background: url('images/...jpg') center/cover; */
+  .tile-connected {
+    background:
+      radial-gradient(circle at 50% 28%, rgba(220,225,235,.55) 0%, rgba(220,225,235,.12) 7%, transparent 9%),
+      linear-gradient(180deg, #1d3a6e 0%, #234a85 55%, #6e4a2e 78%, #3b2a1c 100%);
+  }
+  .tile-resourceful {
+    background:
+      radial-gradient(ellipse at 50% 80%, rgba(240,255,245,.28), transparent 35%),
+      linear-gradient(160deg, #0d3d22 0%, #14572f 50%, #0a2e19 100%);
+  }
+  .tile-global {
+    background:
+      radial-gradient(ellipse at 60% 40%, rgba(40,160,160,.5), transparent 55%),
+      linear-gradient(140deg, #b3a487 0%, #2e9d9d 45%, #8f8468 100%);
+  }
+  .tile::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(10,12,16,0);
+    transition: background .55s;
+  }
+  .tile h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    position: relative;
+    z-index: 1;
+    transition: transform .55s;
+  }
+  .tile p {
+    position: relative;
+    z-index: 1;
+    font-size: .78rem;
+    line-height: 1.65;
+    max-width: 34ch;
+    margin-top: .9rem;
+    opacity: 0;
+    max-height: 0;
+    transition: opacity .45s .15s, max-height .55s;
+  }
+  .tiles:hover .tile:not(:hover) { flex: .72; }
+  .tile:hover {
+    flex: 2;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .tile:hover::after { background: rgba(10,12,16,.45); }
+  .tile:hover p {
+    opacity: 1;
+    max-height: 320px;
+  }
+
+  @media (max-width: 720px) {
+    .tiles { flex-direction: column; }
+    .tile {
+      justify-content: flex-start;
+      align-items: flex-start;
+      text-align: left;
+      min-height: 0;
+      padding: 1.8rem 1.5rem;
+    }
+    .tile::after { background: rgba(10,12,16,.35); }
+    .tile p { opacity: 1; max-height: none; }
+  }
+
+  /* ============ MEET THE TEAM ============ */
+  .team-hero {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 5rem 2rem 3.5rem;
+    /* PLACEHOLDER — remplacer par : background: url('images/team-petal.jpg') center/cover; */
+    background:
+      radial-gradient(ellipse at 30% 30%, rgba(255,255,255,.55), transparent 55%),
+      radial-gradient(ellipse at 75% 70%, rgba(190,170,150,.35), transparent 60%),
+      linear-gradient(150deg, #d8cec2 0%, #e8e0d4 45%, #cdbfae 100%);
+  }
+  .team-hero h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+    font-weight: 400;
+    margin-bottom: 1.4rem;
+  }
+  .team-hero p {
+    font-size: clamp(.9rem, 1.4vw, 1.05rem);
+    line-height: 1.8;
+    max-width: 64ch;
+    margin: 0 auto;
+  }
+  .team-hero .because { font-style: italic; }
+
+  .chevron {
+    display: inline-block;
+    margin-top: 2.5rem;
+    opacity: .55;
+    transition: opacity .3s;
+    animation: chevron-float 2.6s ease-in-out infinite;
+  }
+  .chevron:hover { opacity: .95; }
+  @keyframes chevron-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(4px); }
+  }
+
+  /* Bios */
+  .bio {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 560px;
+  }
+  .bio-photo {
+    min-height: 320px;
+    /* PLACEHOLDERS — remplacer par : background: url('images/christine.jpg') center/cover; etc. */
+  }
+  .bio-photo-christine {
+    background:
+      radial-gradient(ellipse at 80% 20%, rgba(60,90,55,.5), transparent 40%),
+      linear-gradient(160deg, #8a7460 0%, #b59f88 50%, #6e5c4b 100%);
+  }
+  .bio-photo-katelyn {
+    background:
+      radial-gradient(ellipse at 85% 35%, rgba(60,90,55,.45), transparent 40%),
+      linear-gradient(200deg, #9c8a76 0%, #c0ab93 50%, #79675a 100%);
+  }
+  .bio-card-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2.5rem;
+  }
+  .bio-christine .bio-card-wrap { background: #d6d0c0; }
+  .bio-katelyn .bio-card-wrap { background: #9a9189; }
+  .bio-card {
+    background: #faf6ec;
+    padding: 2.6rem 2.4rem;
+    max-width: 420px;
+  }
+  .bio-card h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: .15rem;
+  }
+  .bio-card .role {
+    font-size: .85rem;
+    margin-bottom: 1.4rem;
+  }
+  .bio-card .bio-text {
+    font-size: .85rem;
+    line-height: 1.85;
+    margin-bottom: 1.6rem;
+  }
+  .bio-card .sectors {
+    font-size: .66rem;
+    line-height: 1.6;
+    color: #5a554d;
+  }
+
+  @media (max-width: 820px) {
+    .bio { grid-template-columns: 1fr; }
+    /* la photo d'abord, sur les deux bios */
+    .bio-katelyn .bio-photo { order: -1; }
+    .bio-card-wrap { padding: 2.2rem 1.4rem; }
+  }
+
+  /* ============ QUOTE PAGE ============ */
+  .quote-page {
+    background: var(--paper);
+    padding: clamp(6rem, 14vh, 10rem) 2rem;
+    display: flex;
+    justify-content: center;
+  }
+  .quote-page .quote-box {
+    background: #2b2723;
+    color: #f3efe8;
+    padding: 2.8rem 3.2rem;
+    max-width: 760px;
+    text-align: center;
+    font-family: 'Lora', serif;
+    font-size: clamp(1.15rem, 2.2vw, 1.55rem);
+    line-height: 1.6;
+  }
+
+  /* ============ TESTIMONIALS ============ */
+  .testimonials {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 2rem;
+    text-align: center;
+    /* PLACEHOLDER — remplacer par : background: url('images/testimonials-forest.jpg') center/cover; */
+    background:
+      radial-gradient(ellipse at 20% 95%, rgba(240,235,225,.55), transparent 40%),
+      radial-gradient(ellipse at 60% 100%, rgba(235,230,218,.45), transparent 35%),
+      linear-gradient(180deg, #aebcb6 0%, #7d8f82 40%, #46594a 75%, #5d6b58 100%);
+  }
+  .testimonials h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: .3rem;
+  }
+  .testimonials .sub {
+    font-size: .9rem;
+    color: var(--ink);
+    margin-bottom: 2.4rem;
+  }
+  .carousel {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    max-width: 860px;
+    width: 100%;
+  }
+  .carousel-arrow {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: .6rem;
+    flex-shrink: 0;
+    color: #f3efe8;
+    transition: transform .25s, opacity .25s;
+    opacity: .85;
+  }
+  .carousel-arrow:hover { opacity: 1; transform: scale(1.15); }
+  .testimonial-card {
+    background: #faf7ef;
+    text-align: left;
+    padding: 2.4rem 2.6rem;
+    flex: 1;
+    box-shadow: 0 8px 30px rgba(20,25,20,.18);
+    transition: opacity .3s;
+  }
+  .testimonial-card.is-fading { opacity: 0; }
+  .testimonial-card .t-text {
+    font-size: .92rem;
+    line-height: 1.75;
+    margin-bottom: 1.1rem;
+  }
+  .testimonial-card .t-author { font-size: .92rem; }
+
+  @media (max-width: 640px) {
+    .carousel { gap: .4rem; }
+    .testimonial-card { padding: 1.6rem 1.4rem; }
+  }
+
+  /* ============ PLACEHOLDER SECTIONS (parties suivantes) ============ */
+  .placeholder-section {
+    padding: 6rem 2rem;
+    text-align: center;
+    font-family: 'Canva Sans', 'Jost', sans-serif;
+    font-size: .8rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: #9a948a;
+  }
+  .placeholder-section + .placeholder-section { border-top: 1px solid #ddd7ca; }
+
+  /* ============ FOOTER / CONTACT ============ */
+  .contact-section {
+    padding: clamp(4rem, 10vh, 7rem) 2rem;
+    /* PLACEHOLDER — remplacer par : background: url('images/contact-sand.jpg') center/cover; */
+    background:
+      radial-gradient(ellipse at 15% 30%, rgba(90,80,65,.5), transparent 50%),
+      linear-gradient(115deg, #6e6353 0%, #a99a82 35%, #c4b59c 65%, #b3a48c 100%);
+    color: #f3efe8;
+  }
+  .contact-grid {
+    max-width: 1060px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+  .contact-copy .kicker-line { color: #f0ece2; margin-bottom: 1.2rem; }
+  .contact-copy .kicker-line::before { background: #f0ece2; }
+  .contact-copy h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(1.6rem, 3.2vw, 2.3rem);
+    font-weight: 400;
+    margin-bottom: 1.3rem;
+  }
+  .contact-copy h2 em { font-style: italic; }
+  .contact-copy p {
+    font-size: .9rem;
+    line-height: 1.75;
+    margin-bottom: 1.2rem;
+    max-width: 46ch;
+  }
+  .contact-copy p em { font-style: italic; }
+  .contact-links { margin-top: 1.8rem; }
+  .contact-links .row {
+    display: flex;
+    align-items: baseline;
+    gap: 1.2rem;
+    margin-bottom: .55rem;
+    flex-wrap: wrap;
+  }
+  .contact-links a {
+    color: #f3efe8;
+    font-size: .85rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .contact-links a:hover { color: #fff; }
+  .contact-links .li-link {
+    font-family: 'Canva Sans', 'Jost', sans-serif;
+    font-size: .78rem;
+    letter-spacing: .05em;
+  }
+
+  /* Formulaire */
+  .form-card {
+    background: #f3efe2;
+    color: var(--ink);
+    padding: 2.4rem 2.2rem;
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .form-card label {
+    display: block;
+    font-family: 'Canva Sans', 'Jost', sans-serif;
+    font-size: .68rem;
+    font-weight: 500;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    margin-bottom: .45rem;
+  }
+  .form-card input,
+  .form-card textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #6e675c;
+    padding: .35rem 0 .55rem;
+    margin-bottom: 1.6rem;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: .85rem;
+    color: var(--ink);
+    resize: none;
+  }
+  .form-card input::placeholder,
+  .form-card textarea::placeholder { color: #8d8676; font-style: italic; }
+  .form-card input:focus,
+  .form-card textarea:focus {
+    outline: none;
+    border-bottom-color: var(--band-olive);
+  }
+  .form-card button {
+    align-self: flex-start;
+    background: #8a9168;
+    color: #f7f4ea;
+    border: none;
+    cursor: pointer;
+    font-family: 'Canva Sans', 'Jost', sans-serif;
+    font-size: .72rem;
+    font-weight: 500;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    padding: .85rem 1.5rem;
+    transition: background .25s;
+  }
+  .form-card button:hover { background: #76804f; }
+  .form-card button:disabled { opacity: .6; cursor: wait; }
+  .form-error {
+    color: #8c3b2e;
+    font-size: .78rem;
+    margin-top: 1rem;
+    display: none;
+  }
+
+  /* Message de confirmation */
+  .thank-you { text-align: left; }
+  .thank-you .ty-title {
+    font-family: 'Canva Sans', 'Jost', sans-serif;
+    font-size: .8rem;
+    font-weight: 500;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    margin-bottom: .8rem;
+  }
+  .thank-you .ty-sub {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: .85rem;
+    color: #5a554d;
+  }
+
+  /* Barre finale */
+  .footer-bar {
+    background: #25211d;
+    padding: 2rem;
+  }
+  .footer-bar-inner {
+    max-width: 1060px;
+    margin: 0 auto;
+  }
+  .footer-bar .wordmark {
+    font-family: 'Grace', 'Libre Baskerville', serif;
+    font-size: 1.35rem;
+    letter-spacing: .24em;
+    color: #f3efe8;
+    text-transform: uppercase;
+  }
+  .footer-bar .footer-tagline {
+    font-family: 'Canva Sans', 'Jost', sans-serif;
+    font-size: .62rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: #cfc9c0;
+    margin-top: .45rem;
+  }
+
+  @media (max-width: 820px) {
+    .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
+
+  @media (max-width: 640px) {
+    .brand .tagline { display: none; }
+    .stats { justify-content: center; }
+  }
+
+  /* ============ ENTRÉES DE SECTION AU SCROLL ============ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .chevron { animation: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* ============ OPTIMISATIONS MOBILE ============ */
+  /* Hauteurs stables malgré la barre d'adresse des navigateurs mobiles */
+  @supports (height: 100svh) {
+    .hero { min-height: 92svh; }
+    .mission { min-height: 80svh; }
+    .team-hero { min-height: 60svh; }
+    .testimonials { min-height: 80svh; }
+  }
+  /* Le menu reste utilisable sur petits écrans en paysage */
+  .menu-overlay nav { overflow-y: auto; }
+  .menu-overlay nav a { min-height: 56px; }
+
+  @media (max-width: 640px) {
+    .site-header { padding: .9rem 1.2rem; }
+    .brand .wordmark { font-size: 1.05rem; letter-spacing: .16em; }
+    .menu-toggle { padding: .8rem; flex-shrink: 0; }  /* zone de tap plus large */
+    .menu-overlay .menu-head { padding: 0 3.4rem; }
+    .menu-overlay .menu-head .wordmark { font-size: 1.1rem; letter-spacing: .18em; }
+    .menu-close { right: .9rem; padding: .6rem; }
+
+    .hero { padding: 6.5rem 1.4rem 3.5rem; }
+    .cta-row { margin-bottom: 2.6rem; }
+    .btn { padding: 1rem 1.6rem; }  /* tap target ~44px */
+    .stats { gap: 1.8rem; }
+
+    .mission { padding: 4rem 1.4rem; }
+    .approach { padding: 3.5rem 1.4rem; }
+    .team-hero { padding: 4rem 1.4rem 3rem; }
+    .chevron { padding: .8rem; margin-top: 1.6rem; }
+
+    .quote-page { padding: 4.5rem 1.4rem; }
+    .quote-page .quote-box { padding: 2rem 1.6rem; }
+
+    .testimonials { padding: 4rem .6rem; }
+    .carousel { gap: .2rem; }
+    .carousel-arrow { padding: .7rem .5rem; }
+
+    .contact-section { padding: 3.5rem 1.4rem; }
+    .contact-grid { gap: 2rem; }
+    .form-card { padding: 1.8rem 1.4rem; min-height: 0; }
+    .footer-bar { padding: 1.6rem 1.4rem; }
+  }
+  /* Évite le zoom automatique d'iOS au focus des champs (< 16px) */
+  @media (pointer: coarse) {
+    .form-card input,
+    .form-card textarea { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="siteHeader">
+  <a class="brand" href="#hero">
+    <span class="wordmark">The Sorelle Group</span>
+    <span class="tagline">Boutique Recruitment</span>
+  </a>
+  <button class="menu-toggle" id="menuOpen" aria-label="Open menu">
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- ============ FULLSCREEN MENU ============ -->
+<div class="menu-overlay" id="menuOverlay">
+  <div class="menu-head">
+    <span class="wordmark">The Sorelle Group</span>
+    <button class="menu-close" id="menuClose" aria-label="Close menu">&times;</button>
+  </div>
+  <nav>
+    <a href="#approach">Approach</a>
+    <a href="#team">Team</a>
+    <a href="#contact">Contact</a>
+    <a href="#testimonials">Testimonials</a>
+    <a href="#contact">Work With Us</a>
+  </nav>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <h1>Some searches need a <em>different</em> kind of recruiter.</h1>
+    <p class="lede">
+      Every industry has roles that seem impossible to fill —
+      the unicorn hire, the needle in a haystack, the position that's
+      been quietly defeating everyone who's tried.
+      We've built our entire reputation on <em>finding exactly those people</em>.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-dark" href="#contact">Work With Us</a>
+      <a class="btn btn-light" href="#christine">Meet The Team</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num">34+</div><div class="label">Years Combined</div></div>
+      <div class="stat"><div class="num">3</div><div class="label">Regions</div></div>
+      <div class="stat"><div class="num">1:1</div><div class="label">Every Search</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MISSION ============ -->
+<section class="mission">
+  <div>
+    <blockquote>
+      "To find the people everyone else said <em>couldn't be found</em> —
+      and <em>build the lasting connections</em> that
+      <em>move</em> careers and companies <em>forward</em>."
+    </blockquote>
+    <div class="divider"></div>
+    <a class="kicker" href="#approach">Our Mission</a>
+  </div>
+</section>
+
+<!-- ============ APPROACH / HOW WE WORK ============ -->
+<section class="approach" id="approach">
+  <div class="approach-inner">
+    <div class="kicker-line">How We Work</div>
+    <h2>We don't do volume. <span class="accent">We do results.</span></h2>
+    <p class="intro">
+      Every search is <em>different</em>. Every client gets our <em>full attention</em>.
+      We don't take on more than we <em>can handle</em> — because when we commit,
+      we see it through <em>to the end</em>.
+    </p>
+    <div class="tiles">
+      <div class="tile tile-connected">
+        <h3>Connected</h3>
+        <p>Our relationships are our currency. We've spent over three decades
+        building a network across industries, companies, and continents — and we
+        invest in keeping it alive. When you work with us, you get access to
+        people who aren't on job boards, because they don't need to be.</p>
+      </div>
+      <div class="tile tile-resourceful">
+        <h3>Resourceful</h3>
+        <p>We go further than the database. Direct headhunting, curated
+        referrals, deep industry knowledge and the kind of persistence most
+        recruiters give up on. If the right person exists, we will find them —
+        wherever they are.</p>
+      </div>
+      <div class="tile tile-global">
+        <h3>Global</h3>
+        <p>Headquartered in North America with active placements across the
+        globe. The best candidate for your role might not live next door in the
+        end. Distance has never been a barrier to the right fit for us.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============ MEET THE TEAM ============ -->
+<section class="team-hero" id="team">
+  <div>
+    <h2>Meet the Team</h2>
+    <p>
+      Sorelle Group is boutique by design. Two senior consultants.<br>
+      Over 30 years of combined experience.<br>
+      A network built on trust, not software or algorithms.<br>
+      We serve clients across North America and source talent for them worldwide
+      — and we take on every search as if our reputation depends on it.<br>
+      <span class="because">Because it does.</span>
+    </p>
+    <a class="chevron" href="#christine" aria-label="Scroll to Christine's bio">
+      <svg width="34" height="18" viewBox="0 0 34 18" fill="none">
+        <path d="M2 2 L17 15 L32 2" stroke="#3a352e" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<section class="bio bio-christine" id="christine">
+  <div class="bio-photo bio-photo-christine"></div>
+  <div class="bio-card-wrap">
+    <div class="bio-card">
+      <h3>Christine Spagnuolo</h3>
+      <div class="role">Founder, Consultant</div>
+      <p class="bio-text">
+        Two decades in, Christine has built a reputation that does the talking
+        for her. A true generalist by design, she works across industries with
+        the same rigor and standard — because the discipline of finding
+        exceptional people doesn't change with the sector. Her clients return
+        year after year not because she moves fast, but because she moves fast
+        without cutting corners, digging deeper until she finds the people
+        others miss.
+      </p>
+      <p class="sectors">Sectors: Tech/IT, SaaS, Startups, AI, Real Estate,
+      Legal, Construction, Banking &amp; Finance, Fintech, Healthcare, Medtech
+      &amp; Pharma, Hospitality, CPG, Manufacturing, Apparel, Wine &amp;
+      Spirits, Health &amp; Wellness.</p>
+    </div>
+  </div>
+</section>
+
+<section class="bio bio-katelyn" id="katelyn">
+  <div class="bio-card-wrap">
+    <div class="bio-card">
+      <h3>Katelyn Spagnuolo</h3>
+      <div class="role">Co-Founder, Consultant</div>
+      <p class="bio-text">
+        Ten years in, Katelyn is still the call clients make when a search has
+        stalled out everywhere else. Tenacious, warm, and a natural read of
+        people, she recruits with a feel for fit that no algorithm can match.
+        She invests the time to know the person on both ends of every placement.
+        The résumé is only where it begins.
+      </p>
+      <p class="sectors">Sectors: Tech/IT, SaaS, Startups, AI, Real Estate,
+      Legal, Construction, Banking &amp; Finance, Fintech, Healthcare, Medtech
+      &amp; Pharma, Hospitality, CPG, Manufacturing, Apparel, Wine &amp;
+      Spirits, Health &amp; Wellness.</p>
+    </div>
+  </div>
+  <div class="bio-photo bio-photo-katelyn"></div>
+</section>
+<!-- ============ QUOTE PAGE ============ -->
+<section class="quote-page">
+  <div class="quote-box">
+    Every industry has a role that seems impossible to fill.<br>
+    Those are our favorite calls to receive.
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="testimonials" id="testimonials">
+  <h2>What clients say</h2>
+  <p class="sub">Don't take our word for it.</p>
+  <div class="carousel">
+    <button class="carousel-arrow" id="tPrev" aria-label="Previous testimonial">
+      <svg width="22" height="38" viewBox="0 0 22 38" fill="none">
+        <path d="M19 3 L4 19 L19 35" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="testimonial-card" id="tCard">
+      <p class="t-text" id="tText"></p>
+      <p class="t-author" id="tAuthor"></p>
+    </div>
+    <button class="carousel-arrow" id="tNext" aria-label="Next testimonial">
+      <svg width="22" height="38" viewBox="0 0 22 38" fill="none">
+        <path d="M3 3 L18 19 L3 35" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+</section>
+
+<!-- ============ FOOTER / CONTACT ============ -->
+<footer id="contact">
+  <div class="contact-section">
+    <div class="contact-grid">
+      <div class="contact-copy">
+        <div class="kicker-line">Let's Talk.</div>
+        <h2>Ready to find <em>the right fit</em>?</h2>
+        <p>Whether you're building a team or ready for your next chapter —
+        the conversation starts here.</p>
+        <p>We work with a small number of clients at any one time, so when you
+        reach out, you get our full attention. Not an auto-reply. Not a junior
+        team member. <em>Us.</em></p>
+        <div class="contact-links">
+          <div class="row">
+            <a href="mailto:christine@thesorellegroup.com">christine@thesorellegroup.com</a>
+            <a class="li-link" href="https://www.linkedin.com/in/christinespagnuolo/" target="_blank" rel="noopener">LinkedIn &rsaquo;</a>
+          </div>
+          <div class="row">
+            <a href="mailto:katelyn@thesorellegroup.com">katelyn@thesorellegroup.com</a>
+            <a class="li-link" href="https://www.linkedin.com/in/katelyn-spagnuolo-59116a10b/" target="_blank" rel="noopener">LinkedIn &rsaquo;</a>
+          </div>
+        </div>
+      </div>
+      <div class="form-card" id="formCard">
+        <form id="contactForm" novalidate>
+          <label for="cfName">Your Name</label>
+          <input type="text" id="cfName" name="name" placeholder="Full name" required>
+          <label for="cfEmail">Email Address</label>
+          <input type="email" id="cfEmail" name="email" placeholder="you@company.com" required>
+          <label for="cfMessage">What Are You Looking For?</label>
+          <textarea id="cfMessage" name="message" rows="2" placeholder="I'm looking to hire / I'm open to new opportunities" required></textarea>
+          <button type="submit" id="cfSubmit">Send Message</button>
+          <p class="form-error" id="cfError">Something went wrong. Please email us directly at christine@thesorellegroup.com.</p>
+        </form>
+        <div class="thank-you" id="thankYou" hidden>
+          <p class="ty-title">Thank You.</p>
+          <p class="ty-sub">We will be in touch within 2-3 business days.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <div class="footer-bar-inner">
+      <div class="wordmark">The Sorelle Group</div>
+      <div class="footer-tagline">Boutique Recruitment. &nbsp;Lasting Connections.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---------- Menu plein écran ----------
+  const overlay = document.getElementById('menuOverlay');
+  document.getElementById('menuOpen').addEventListener('click', () => {
+    // Compense la disparition de la scrollbar pour éviter le décalage du contenu
+    const sbw = window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.paddingRight = sbw + 'px';
+    overlay.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  });
+  function closeMenu() {
+    overlay.classList.remove('is-open');
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+  }
+  document.getElementById('menuClose').addEventListener('click', closeMenu);
+  overlay.querySelectorAll('nav a').forEach(a => a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+  // ---------- Header intelligent ----------
+  // Visible sur le hero ; caché au scroll ; réapparaît quand le curseur
+  // approche du haut du viewport (zone de 40px) ; reste tant qu'on survole
+  // le header ; se cache à nouveau quand le curseur repart.
+  const header = document.getElementById('siteHeader');
+  const hero = document.getElementById('hero');
+  const REVEAL_ZONE = 40; // px depuis le haut du viewport
+
+  let onHero = true;        // le hero est-il encore visible à l'écran ?
+  let cursorRevealed = false;
+  let hoveringHeader = false;
+
+  function updateHeader() {
+    const show = onHero || cursorRevealed || hoveringHeader;
+    header.classList.toggle('is-hidden', !show);
+  }
+
+  // Observe le hero : header affiché par défaut tant qu'on est dessus
+  new IntersectionObserver(entries => {
+    onHero = entries[0].isIntersecting;
+    updateHeader();
+  }, { threshold: 0.15 }).observe(hero);
+
+  // Révélation par le curseur en haut du viewport
+  document.addEventListener('mousemove', e => {
+    if (e.clientY <= REVEAL_ZONE) {
+      cursorRevealed = true;
+    } else if (!hoveringHeader && e.clientY > header.offsetHeight + 10) {
+      cursorRevealed = false;
+    }
+    updateHeader();
+  });
+
+  header.addEventListener('mouseenter', () => { hoveringHeader = true; updateHeader(); });
+  header.addEventListener('mouseleave', () => { hoveringHeader = false; cursorRevealed = false; updateHeader(); });
+
+  // Sur tactile (pas de curseur) : le header réapparaît quand on scrolle
+  // vers le haut et se cache quand on scrolle vers le bas.
+  if (window.matchMedia('(pointer: coarse)').matches) {
+    let lastY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y < lastY - 5) cursorRevealed = true;
+      else if (y > lastY + 5) cursorRevealed = false;
+      lastY = y;
+      updateHeader();
+    }, { passive: true });
+  }
+
+  // ---------- Carrousel de témoignages ----------
+  const TESTIMONIALS = [
+    {
+      text: '"Christine isn\'t like modern recruiters who just search databases and pray. She\'s old-school – understanding exactly what you need, then hunting down perfect matches who aren\'t even looking. Since 2009, her placements have a 100% success rate through probation and beyond. She doesn\'t stop until it\'s perfect."',
+      author: '– James W.'
+    },
+    {
+      text: '"I was looking for a change and there weren\'t any roles that perfectly matched what I had in mind — but Katelyn found something she thought I\'d be interested in, and she was right. Six months later I\'m still in that role. She was there for every step of the interview process, followed up after each round, and even checked in months after I started. I\'ll go back to her every time."',
+      author: '– Amanda H.'
+    },
+    {
+      text: '"Christine\'s ability to truly understand her clients is unsurpassed. Her commitment to knowing what you actually need — not just what you\'ve asked for — combined with her professionalism and attention to detail makes her an asset to any company. I recommend her without hesitation."',
+      author: '– George B.'
+    },
+    {
+      text: '"Katelyn has been invaluable to our HR team. Recruiting for a notoriously hard-to-fill role, she thoroughly screened applicants and ensured only genuinely qualified candidates made it to interview. She took the time to understand not just the role but our company culture — and found us someone great. We\'ll be using her for every future search."',
+      author: '– Michael R.'
+    },
+    {
+      text: '"Christine took the time to understand who I actually am — well beyond what a résumé communicates. I trusted her completely to represent my strengths to her client. She was available every step of the way, made the process seamless, and placed me in the right role. I\'ll stay connected to her for the rest of my career."',
+      author: '– Michelle W.'
+    }
+  ];
+  let tIndex = 0;
+  const tCard = document.getElementById('tCard');
+  const tText = document.getElementById('tText');
+  const tAuthor = document.getElementById('tAuthor');
+
+  function renderTestimonial(i) {
+    tCard.classList.add('is-fading');
+    setTimeout(() => {
+      tText.textContent = TESTIMONIALS[i].text;
+      tAuthor.textContent = TESTIMONIALS[i].author;
+      tCard.classList.remove('is-fading');
+    }, 300);
+  }
+  function prevTestimonial() {
+    tIndex = (tIndex - 1 + TESTIMONIALS.length) % TESTIMONIALS.length;
+    renderTestimonial(tIndex);
+  }
+  function nextTestimonial() {
+    tIndex = (tIndex + 1) % TESTIMONIALS.length;
+    renderTestimonial(tIndex);
+  }
+  document.getElementById('tPrev').addEventListener('click', prevTestimonial);
+  document.getElementById('tNext').addEventListener('click', nextTestimonial);
+
+  // Swipe sur mobile
+  let swipeX = null;
+  tCard.addEventListener('touchstart', e => { swipeX = e.touches[0].clientX; }, { passive: true });
+  tCard.addEventListener('touchend', e => {
+    if (swipeX === null) return;
+    const dx = e.changedTouches[0].clientX - swipeX;
+    if (Math.abs(dx) > 40) (dx < 0 ? nextTestimonial : prevTestimonial)();
+    swipeX = null;
+  }, { passive: true });
+  // état initial sans fondu
+  tText.textContent = TESTIMONIALS[0].text;
+  tAuthor.textContent = TESTIMONIALS[0].author;
+
+  // ---------- Entrées de section au scroll ----------
+  // Fondu + léger mouvement vers le haut (16px), une seule fois par section.
+  // Le hero est exclu : il est visible dès le chargement.
+  const revealTargets = document.querySelectorAll(
+    '.mission, .approach, .team-hero, .bio, .quote-page, .testimonials, .contact-section'
+  );
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealTargets.forEach(el => {
+    el.classList.add('reveal');
+    revealObserver.observe(el);
+  });
+
+  // ---------- Formulaire de contact ----------
+  // Envoi via FormSubmit (https://formsubmit.co) : transfère les données à
+  // christine@thesorellegroup.com et envoie une confirmation automatique
+  // au visiteur. Au premier envoi, FormSubmit envoie un email d'activation
+  // à Christine qu'elle devra confirmer une fois.
+  const contactForm = document.getElementById('contactForm');
+  const cfError = document.getElementById('cfError');
+
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!contactForm.reportValidity()) return;
+
+    const btn = document.getElementById('cfSubmit');
+    btn.disabled = true;
+    cfError.style.display = 'none';
+
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/christine@thesorellegroup.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name: document.getElementById('cfName').value,
+          email: document.getElementById('cfEmail').value,
+          message: document.getElementById('cfMessage').value,
+          _subject: 'New inquiry — The Sorelle Group website',
+          _template: 'table',
+          _replyto: document.getElementById('cfEmail').value,
+          _autoresponse: 'Thank you for reaching out to The Sorelle Group. Your inquiry has been received and someone from our team will be in touch within 2-3 business days.'
+        })
+      });
+      if (!res.ok) throw new Error('send failed');
+      contactForm.hidden = true;
+      document.getElementById('thankYou').hidden = false;
+    } catch (err) {
+      cfError.style.display = 'block';
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
