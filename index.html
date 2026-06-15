@@ -185,11 +185,9 @@
     align-items: center;
     padding: 8rem 2rem 4rem;
     position: relative;
-    /* PLACEHOLDER — remplacer par : background: url('images/hero.jpg') center/cover; */
     background:
-      radial-gradient(ellipse at 70% 20%, rgba(255,255,255,.25), transparent 50%),
-      radial-gradient(ellipse at 20% 80%, rgba(30,80,90,.18), transparent 55%),
-      linear-gradient(160deg, #9ec9c4 0%, #7fb5b3 45%, #8ec0bd 100%);
+      linear-gradient(120deg, rgba(245,242,234,.35) 0%, rgba(158,201,196,.05) 55%, transparent 100%),
+      url('images/hero.jpg') center/cover no-repeat;
   }
   .hero-inner {
     max-width: 1100px;
@@ -263,10 +261,9 @@
     padding: 5rem 2rem;
     position: relative;
     color: #f3efe8;
-    /* PLACEHOLDER — remplacer par : background: url('images/mission-horse.jpg') center/cover; */
     background:
-      linear-gradient(rgba(20,15,12,.35), rgba(20,15,12,.45)),
-      linear-gradient(170deg, #6b5a4e 0%, #3d3530 40%, #1f1b18 100%);
+      linear-gradient(rgba(20,15,12,.3), rgba(20,15,12,.45)),
+      url('images/mission-horse.jpg') center 35%/cover no-repeat;
   }
   .mission blockquote {
     /* Quote: Lora Italic */
@@ -353,21 +350,14 @@
     overflow: hidden;
     transition: flex .55s cubic-bezier(.4,0,.2,1);
   }
-  /* PLACEHOLDERS — remplacer par : background: url('images/...jpg') center/cover; */
   .tile-connected {
-    background:
-      radial-gradient(circle at 50% 28%, rgba(220,225,235,.55) 0%, rgba(220,225,235,.12) 7%, transparent 9%),
-      linear-gradient(180deg, #1d3a6e 0%, #234a85 55%, #6e4a2e 78%, #3b2a1c 100%);
+    background: url('images/tile-connected.jpg') center 30%/cover no-repeat;
   }
   .tile-resourceful {
-    background:
-      radial-gradient(ellipse at 50% 80%, rgba(240,255,245,.28), transparent 35%),
-      linear-gradient(160deg, #0d3d22 0%, #14572f 50%, #0a2e19 100%);
+    background: url('images/tile-resourceful.jpg') center 40%/cover no-repeat;
   }
   .tile-global {
-    background:
-      radial-gradient(ellipse at 60% 40%, rgba(40,160,160,.5), transparent 55%),
-      linear-gradient(140deg, #b3a487 0%, #2e9d9d 45%, #8f8468 100%);
+    background: url('images/tile-global.jpg') center/cover no-repeat;
   }
   .tile::after {
     content: '';
@@ -382,6 +372,7 @@
     font-weight: 400;
     position: relative;
     z-index: 1;
+    text-shadow: 0 1px 12px rgba(10,12,16,.55);
     transition: transform .55s;
   }
   .tile p {
@@ -429,11 +420,9 @@
     justify-content: center;
     text-align: center;
     padding: 5rem 2rem 3.5rem;
-    /* PLACEHOLDER — remplacer par : background: url('images/team-petal.jpg') center/cover; */
     background:
-      radial-gradient(ellipse at 30% 30%, rgba(255,255,255,.55), transparent 55%),
-      radial-gradient(ellipse at 75% 70%, rgba(190,170,150,.35), transparent 60%),
-      linear-gradient(150deg, #d8cec2 0%, #e8e0d4 45%, #cdbfae 100%);
+      linear-gradient(rgba(250,247,240,.45), rgba(250,247,240,.35)),
+      url('images/team-petal.jpg') center/cover no-repeat;
   }
   .team-hero h2 {
     font-family: 'Libre Baskerville', serif;
@@ -473,14 +462,10 @@
     /* PLACEHOLDERS — remplacer par : background: url('images/christine.jpg') center/cover; etc. */
   }
   .bio-photo-christine {
-    background:
-      radial-gradient(ellipse at 80% 20%, rgba(60,90,55,.5), transparent 40%),
-      linear-gradient(160deg, #8a7460 0%, #b59f88 50%, #6e5c4b 100%);
+    background: url('images/christine.jpg') center 20%/cover no-repeat;
   }
   .bio-photo-katelyn {
-    background:
-      radial-gradient(ellipse at 85% 35%, rgba(60,90,55,.45), transparent 40%),
-      linear-gradient(200deg, #9c8a76 0%, #c0ab93 50%, #79675a 100%);
+    background: url('images/katelyn.jpg') center 25%/cover no-repeat;
   }
   .bio-card-wrap {
     display: flex;
@@ -550,11 +535,8 @@
     justify-content: center;
     padding: 5rem 2rem;
     text-align: center;
-    /* PLACEHOLDER — remplacer par : background: url('images/testimonials-forest.jpg') center/cover; */
-    background:
-      radial-gradient(ellipse at 20% 95%, rgba(240,235,225,.55), transparent 40%),
-      radial-gradient(ellipse at 60% 100%, rgba(235,230,218,.45), transparent 35%),
-      linear-gradient(180deg, #aebcb6 0%, #7d8f82 40%, #46594a 75%, #5d6b58 100%);
+    background: url('images/testimonials-forest.jpg') center top/210% auto no-repeat;
+    background-color: #cdbf9e;
   }
   .testimonials h2 {
     font-family: 'Libre Baskerville', serif;
@@ -622,10 +604,9 @@
   /* ============ FOOTER / CONTACT ============ */
   .contact-section {
     padding: clamp(4rem, 10vh, 7rem) 2rem;
-    /* PLACEHOLDER — remplacer par : background: url('images/contact-sand.jpg') center/cover; */
     background:
-      radial-gradient(ellipse at 15% 30%, rgba(90,80,65,.5), transparent 50%),
-      linear-gradient(115deg, #6e6353 0%, #a99a82 35%, #c4b59c 65%, #b3a48c 100%);
+      linear-gradient(105deg, rgba(40,34,28,.62) 0%, rgba(40,34,28,.28) 45%, rgba(40,34,28,.1) 100%),
+      url('images/contact-sand.jpg') center/cover no-repeat;
     color: #f3efe8;
   }
   .contact-grid {
