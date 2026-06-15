@@ -64,28 +64,15 @@
   }
   .brand {
     display: flex;
-    align-items: baseline;
-    gap: 1rem;
+    align-items: center;
     text-decoration: none;
   }
-  .brand .wordmark {
-    /* Logo: Grace Regular */
-    font-family: 'Grace', 'Libre Baskerville', serif;
-    font-weight: normal;
-    font-size: 1.6rem;
-    letter-spacing: .22em;
-    color: var(--logo-blue);
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-  .brand .tagline {
-    /* Subtitle: Libre Baskerville */
-    font-family: 'Libre Baskerville', serif;
-    font-weight: 400;
-    font-size: .68rem;
-    letter-spacing: .18em;
-    color: #cfc9c0;
-    text-transform: uppercase;
+  .brand .brand-logo {
+    height: 26px;
+    width: auto;
+    max-width: 62vw;
+    object-fit: contain;
+    display: block;
   }
 
   /* hamburger: grid of dots, comme la maquette */
@@ -760,7 +747,6 @@
   }
 
   @media (max-width: 640px) {
-    .brand .tagline { display: none; }
     .stats { justify-content: center; }
   }
 
@@ -794,7 +780,7 @@
 
   @media (max-width: 640px) {
     .site-header { padding: .9rem 1.2rem; }
-    .brand .wordmark { font-size: 1.05rem; letter-spacing: .16em; }
+    .brand .brand-logo { height: auto; width: calc(100vw - 84px); max-width: none; }
     .menu-toggle { padding: .8rem; flex-shrink: 0; }  /* zone de tap plus large */
     .menu-overlay .menu-head { padding: 0 3.4rem; }
     .menu-overlay .menu-head .wordmark { font-size: 1.1rem; letter-spacing: .18em; }
@@ -834,8 +820,7 @@
 <!-- ============ HEADER ============ -->
 <header class="site-header" id="siteHeader">
   <a class="brand" href="#hero">
-    <span class="wordmark">The Sorelle Group</span>
-    <span class="tagline">Boutique Recruitment</span>
+    <img class="brand-logo" src="images/header-logo.png" alt="The Sorelle Group — Boutique Recruitment">
   </a>
   <button class="menu-toggle" id="menuOpen" aria-label="Open menu">
     <span></span><span></span><span></span>
