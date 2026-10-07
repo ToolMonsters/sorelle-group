@@ -119,13 +119,10 @@
     flex: 1.2;
     min-height: 0;
   }
-  .menu-overlay .menu-head .wordmark {
-    font-family: 'Grace', 'Libre Baskerville', serif;
-    font-size: clamp(1.6rem, 4vw, 2.6rem);
-    letter-spacing: .28em;
-    color: var(--band-lightblue);
-    text-transform: uppercase;
-    font-weight: normal;
+  .menu-overlay .menu-head .menu-logo {
+    width: min(620px, 62vw);
+    height: auto;
+    display: block;
   }
   .menu-close {
     position: absolute;
@@ -160,7 +157,7 @@
     font-size: clamp(1.3rem, 3vw, 2rem);
     letter-spacing: .14em;
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 400;
     color: var(--ink);
     transition: filter .25s;
   }
@@ -916,7 +913,7 @@
     .brand .brand-logo { height: auto; width: calc(100vw - 84px); max-width: none; }
     .menu-toggle { padding: .8rem; flex-shrink: 0; }  /* zone de tap plus large */
     .menu-overlay .menu-head { padding: 0 3.4rem; }
-    .menu-overlay .menu-head .wordmark { font-size: 1.1rem; letter-spacing: .18em; }
+    .menu-overlay .menu-head .menu-logo { width: calc(100vw - 150px); }
     .menu-close { right: .9rem; padding: .6rem; }
 
     .hero { padding: 6.5rem 1.4rem 3.5rem; }
@@ -970,7 +967,7 @@
 <!-- ============ FULLSCREEN MENU ============ -->
 <div class="menu-overlay" id="menuOverlay">
   <div class="menu-head">
-    <span class="wordmark">The Sorelle Group</span>
+    <img class="menu-logo" src="images/menu-logo.png" alt="The Sorelle Group">
     <button class="menu-close" id="menuClose" aria-label="Close menu">&times;</button>
   </div>
   <nav>
