@@ -466,7 +466,9 @@
   /* Bios */
   .bio {
     display: grid;
-    grid-template-columns: minmax(0, 719fr) minmax(0, 721fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 5px;
+    background: #fff;
     min-height: max(100vh, 760px);
   }
   .bio-photo {
@@ -487,14 +489,11 @@
   }
   .bio-christine .bio-card-wrap {
     background: #d9d4c7;
-    border-left: 5.5px solid #fff;
     justify-content: flex-start;
-    padding: 0 0 0 53.5px;
+    padding: 0 0 0 55.5px;
   }
-  .bio-katelyn { grid-template-columns: minmax(0, 724.5fr) minmax(0, 715.5fr); }
   .bio-katelyn .bio-card-wrap {
     background: #aba399;
-    border-right: 5.5px solid #fff;
     justify-content: flex-start;
     padding: 0 0 0 60px;
   }
@@ -552,13 +551,13 @@
     .bio-katelyn .bio-photo { order: -1; }
     .bio-card-wrap { padding: 2.2rem 1.4rem; }
     .bio { min-height: 0; }
-    .bio-katelyn .bio-card-wrap { border-right: 0; padding: 2.2rem 1.4rem; justify-content: center; }
+    .bio-katelyn .bio-card-wrap { padding: 2.2rem 1.4rem; justify-content: center; }
     .bio-katelyn .bio-card { min-height: 0; padding: 2rem 1.6rem; }
     .bio-katelyn .bio-card h3 { font-size: 1.45rem; }
     .bio-katelyn .bio-card .role { font-size: 1.15rem; }
     .bio-katelyn .bio-card .bio-text { font-size: 1.1rem; line-height: 1.6; }
     .bio-katelyn .bio-card .sectors { font-size: .85rem; line-height: 1.45; }
-    .bio-christine .bio-card-wrap { border-left: 0; padding: 2.2rem 1.4rem; justify-content: center; }
+    .bio-christine .bio-card-wrap { padding: 2.2rem 1.4rem; justify-content: center; }
     .bio-christine .bio-card { min-height: 0; padding: 2rem 1.6rem; }
     .bio-christine .bio-card h3 { font-size: 1.45rem; }
     .bio-christine .bio-card .role { font-size: 1.15rem; }
